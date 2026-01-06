@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirroir connecté</title>
+
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body class="">
+    <div class="conteneur_principal">
+        <div class="" id="icon-journee">
+            <img class="" id="sun-moon-icon" src="" alt="">
+        </div>
+        <div class="param_info">
+            <h1 id="info-text-1"></h1>
+            <h1 id="info-text-2"></h1>
+        </div>
+
+        <div class="conteneur_bas">
+            <div class="zone_1">
+                <p id="temp-display"></p>
+                <br>
+                <p id="uptime-display"></p>
+            </div>
+            <div class="zone_2">
+                <p>Zone 2</p>
+            </div>
+            <div class="zone_3">
+                <p>Zone 3</p>
+            </div>
+        </div>
+
+        <div class="bandeau_droite">
+            <!-- Pour plus tard -->
+        </div>
+    </div>
+
+
+    <script>
+
+        ////////// CONFIGURATION DE API
+        const CONFIG = {
+            WEATHER_API_KEY: '2c3c83b617e1a6a1ce320ddf94db8e35',
+            CITY: 'Paris'
+        };
+
+        ////////// FONCTIONS QUI GERE LA SYNCHRO JOUR NUIT
+
+        async function UpdateSunMoon() {
+            const body_degrade = document.querySelector('body')
+            const div_degrade = document.getElementById('icon-journee')
+            const iconDate = document.getElementById('sun-moon-icon')
+            const infoDate = document.getElementById('info-text-1')
+            const infoHeure = document.getElementById('info-text-2')
+
+            if (CONFIG.WEATHER_API_KEY === '') {
+                iconDate.textContent = '⚙️'
+                infoElement.textContent = 'Configuration de l\'API nécessaire'
+                return
+            }
+
+            //////////CONFIGURATION DE LA DATE
+            let nowDate = new Date()
+
+            // Jour en FR et date
+            const joursSemaine = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
+            const jour = joursSemaine[nowDate.getDay()]
+            const date = `${String(nowDate.getDate()).padStart(2, '0')}/${String(nowDate.getMonth() + 1).padStart(2, '0')}/${nowDate.getFullYear()}`
+            // Heure
+            const heure = `${String(nowDate.getHours()).padStart(2, '0')}:${String(nowDate.getMinutes()).padStart(2, '0')}`
+            // Formatage de la date
+            const dateFormatee = `${jour} ${date}`
+
+            try {
+                const url = `https://api.openweathermap.org/data/2.5/weather?q=${CONFIG.CITY}&appid=${CONFIG.WEATHER_API_KEY}`
+                const response = await fetch(url)
+                
+                if (!response.ok) {
+                    throw new Error('Erreur API');
+                }
+                
+                const data = await response.json()
+                
+                // Timestamps de lever et coucher du soleil (en secondes)
+                const sunrise = data.sys.sunrise
+                const sunset = data.sys.sunset
+                const now = Math.floor(Date.now() / 1000)
+                
+                // Convertir en heures locales pour affichage
+                const sunriseDate = new Date(sunrise * 1000)
+                const sunsetDate = new Date(sunset * 1000)
+                const sunriseTime = `${String(sunriseDate.getHours()).padStart(2, '0')}:${String(sunriseDate.getMinutes()).padStart(2, '0')}`
+                const sunsetTime = `${String(sunsetDate.getHours()).padStart(2, '0')}:${String(sunsetDate.getMinutes()).padStart(2, '0')}`
+                
+                // Calculer 1 heure après le lever et 1 heure avant le coucher
+                const morningEnd = sunrise + 3600; // +1 heure
+                const eveningStart = sunset - 3600; // -1 heure
+                
+                // Déterminer l'icône à afficher
+                if (now < sunrise) {
+                    // Nuit (avant le lever du soleil)
+                    iconDate.src = 'images/lune.png'
+                    iconDate.className = 'param_img_lune'
+                    body_degrade.className = 'body_night'
+                    div_degrade.className = 'param_night'
+                    infoDate.textContent = `${dateFormatee}`
+                    infoHeure.textContent = `${heure}`
+                } else if (now >= sunrise && now < morningEnd) {
+                    // Matinée (lever du soleil jusqu'à 1h après)
+                    iconDate.src = 'images/coucher.png'
+                    iconDate.className = 'param_img_coucher'
+                    body_degrade.className = 'body_coucher'
+                    div_degrade.className = 'param_coucher'
+                    infoDate.textContent = `${dateFormatee}`
+                    infoHeure.textContent = `${heure}`
+                } else if (now >= morningEnd && now < eveningStart) {
+                    // Journée
+                    iconDate.src = 'images/soleil.png'
+                    iconDate.className = 'param_img_soleil'
+                    body_degrade.className = 'body_day'
+                    div_degrade.className = 'param_day'
+                    infoDate.textContent = `${dateFormatee}`
+                    infoHeure.textContent = `${heure}`
+                } else if (now >= eveningStart && now < sunset) {
+                    // Soir (1h avant le coucher jusqu'au coucher)
+                    iconDate.src = 'images/coucher.png'
+                    iconDate.className = 'param_img_coucher'
+                    body_degrade.className = 'body_coucher'
+                    div_degrade.className = 'param_coucher'
+                    infoDate.textContent = `${dateFormatee}`
+                    infoHeure.textContent = `${heure}`
+                } else {
+                    // Nuit (après le coucher du soleil)
+                    iconDate.src = 'images/lune.png'
+                    iconDate.className = 'param_img_lune'
+                    body_degrade.className = 'body_night'
+                    div_degrade.className = 'param_night'
+                    infoDate.textContent = `${dateFormatee}`
+                    infoHeure.textContent = `${heure}`
+                }
+                
+            } catch (error) {
+                iconDate.textContent = 'erreur'
+                infoDate.textContent = `${dateFormatee}`
+                infoHeure.textContent = `${dateFormatee}`
+                console.error('Erreur:', error)
+            }
+        }
+
+        ///////// FONCTION QUI RECOIT LES INFOS DU SERVEUR FLASK ET GENERE LE HTML EN CONSEQUENCE
+        async function updateSystemInfo() {
+            const tempDisplay = document.getElementById('temp-display')
+            const uptimeDisplay = document.getElementById('uptime-display') 
+            const infoBox1 = document.querySelector('.info-box-1');
+            
+            try {
+                const response = await fetch('http://localhost:5000/system-info');
+                const systemInfo = await response.json();
+                
+                // Formatage de la température
+                if (systemInfo.temperature !== 'N/A') {
+                    const FormatageTemp = `${systemInfo.temperature}°C`
+                } 
+                if (systemInfo.temperature === 'N/A') {
+                    const FormatageTemp = 'N/A'
+                }
+                
+                //Affichage du HTML
+                tempDisplay.textContent = `${FormatageTemp}`
+                uptimeDisplay.textContent = `En marche depuis ${systemInfo.uptime_jours}j - ${systemInfo.uptime_heures}h ${systemInfo.uptime_minutes}`
+                
+            } catch (error) {
+                console.error('Erreur lors de la récupération des systemInfo :', error);
+                tempDisplay.textContent = `erreur`
+                uptimeDisplay.textContent = `erreur`                
+            }
+        }
+
+        // Charger au démarrage
+        UpdateSunMoon()
+        updateSystemInfo()
+
+        // Actualiser toutes les minutes
+        setInterval(UpdateSunMoon, 60000)
+        setInterval(updateSystemInfo, 5000)
+    </script>
+</body>
+</html>
