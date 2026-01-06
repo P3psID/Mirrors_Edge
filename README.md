@@ -10,3 +10,4 @@ This project is more or less beginner friendly (I think), it will require to kno
     - Python + Flask
     - Network computing (this one is not necessary, but we will deal a little with the IP and the ssh protocol to make our life easier)
     - Linux (in my case : Raspberry OS Lite)
+
