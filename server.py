@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 import psutil
+import os
 import time
 import platform
 
@@ -35,6 +36,13 @@ def system_info():
         'uptime_heures': heures,
         'uptime_minutes': minutes,
     })
+
+@app.route('/shutdown')
+def shutdown():
+    print('Shutting down')
+    os.system("sudo shutdown -h now")
+    return None
+
 
 if __name__ == '__main__':
     print("Infos du système sur : http://localhost:5000/system-info")
