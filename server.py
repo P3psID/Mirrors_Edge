@@ -10,12 +10,23 @@ CORS(app)
 
 
 def get_cpu_temperature():
-    temps = psutil.sensors_temperatures()
-    if 'coretemp' in temps:
-        return round(temps['coretemp'][0].current, 1)
-    elif 'cpu_thermal' in temps:  # Raspberry Pi
-        return round(temps['cpu_thermal'][0].current, 1)
+    try:
+        temps = psutil.sensors_temperatures()
+        if not temps:
+            return None
+        if 'coretemp' in temps:
+            return round(temps['coretemp'][0].current, 1)
+        if 'cpu_thermal' in temps:  # Raspberry Pi
+            return round(temps['cpu_thermal'][0].current, 1)
+    except Exception as e:
+        print("Erreur température :", e)
+    return None
 
+
+@app.route('/test')
+def test():
+    print('test')
+    return 5
 
 @app.route('/system-info')
 def system_info():
