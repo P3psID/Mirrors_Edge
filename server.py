@@ -26,7 +26,7 @@ def get_cpu_temperature():
 @app.route('/test')
 def test():
     print('test')
-    return 5
+    return 'test'
 
 @app.route('/system-info')
 def system_info():
@@ -51,7 +51,7 @@ def system_info():
 @app.route('/shutdown')
 def shutdown():
     print('Shutting down')
-    os.system("sudo shutdown -h now")
+    os.system("shutdown -h now")
     return None
 
 
