@@ -57,4 +57,4 @@ def shutdown():
 
 if __name__ == '__main__':
     print("Infos du système sur : http://localhost:5000/system-info")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)
