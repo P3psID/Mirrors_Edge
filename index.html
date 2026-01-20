@@ -28,7 +28,11 @@
                 <p id="uptime-display"></p>
             </div>
             <div class="zone_2">
-                <p>Zone 2</p>
+                <div id="zone_2_center">
+                    <h3 id="zone_2_titre"></h3>
+                    <p id="zone_2_event"></p>
+                    <p id="zone_2_description"></p>
+                </div>
             </div>
             <div class="zone_3">
                 <p>Zone 3</p>
@@ -46,6 +50,12 @@
         const CONFIG = {
             WEATHER_API_KEY: '2c3c83b617e1a6a1ce320ddf94db8e35',
             CITY: 'Paris'
+        };
+
+        ////////// CONFIGURATION GOOGLE CALENDAR
+        const GOOGLE_CONFIG = {
+            API_KEY: 'AIzaSyCvdrPZHJ4YT7qfi-LpHUg1O3BK-wP8t9I', 
+            CALENDAR_ID: 'hcarrance@gmail.com' 
         };
 
         ////////// FONCTIONS QUI GERE LA SYNCHRO JOUR NUIT
@@ -182,13 +192,79 @@
             }
         }
 
+
+        ///////// FONCTION QUI S'OCCUPE DE LA ZONE 2 : L'API GOOGLE AGENDA
+        async function updateNextEvent() {
+            const zone2 = document.querySelector('.zone_2');
+            const zone_2_titre = document.getElementById('zone_2_titre');
+            const zone_2_event = document.getElementById('zone_2_event');
+            const zone_2_description = document.getElementById('zone_2_description');
+            
+            try {
+                // Date actuelle
+                const now = new Date().toISOString();
+                
+                // URL de l'API Google Calendar
+                const url = `https://www.googleapis.com/calendar/v3/calendars/${GOOGLE_CONFIG.CALENDAR_ID}/events?key=${GOOGLE_CONFIG.API_KEY}&timeMin=${now}&maxResults=1&orderBy=startTime&singleEvents=true`;
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`Erreur API: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Vérifier s'il y a des événements
+                if (data.items && data.items.length > 0) {
+                    const event = data.items[0];
+                    
+                    // Extraire les infos
+                    const titre = event.summary || 'Sans titre';
+                    const start = event.start.dateTime || event.start.date;
+                    const startDate = new Date(start);
+                    
+                    // Formater la date et l'heure
+                    const joursSemaine = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+                    const jour = joursSemaine[startDate.getDay()];
+                    const date = `${String(startDate.getDate()).padStart(2, '0')}/${String(startDate.getMonth() + 1).padStart(2, '0')}`;
+                    const heure = event.start.dateTime 
+                        ? `${String(startDate.getHours()).padStart(2, '0')}:${String(startDate.getMinutes()).padStart(2, '0')}`
+                        : 'Toute la journée';
+                    
+                    // Afficher dans la zone 2
+
+                    zone_2_titre.textContent = '📅 Prochain événement' ;
+                    zone_2_event.textContent = titre ;
+                    zone_2_description.textContent = `${jour} ${date} - ${heure}`;
+
+                } else {
+                    // Aucun événement à venir
+                    zone_2_titre.textContent = '📅 Calendrier vide' ;
+                    zone_2_event.textContent = 'Aucun événement à venir' ;
+                }
+                
+            } catch (error) {
+                console.error('Erreur Google Calendar:', error);
+                zone_2_titre.textContent = '❌ Erreur Calendar' ;
+                zone_2_event.textContent = 'Vérifiez la clé API' ;
+
+            }
+        }
+
+
+
+
+
+
         // Charger au démarrage
         UpdateSunMoon()
         updateSystemInfo()
+        updateNextEvent()
 
         // Actualiser toutes les minutes
         setInterval(UpdateSunMoon, 60000)
         setInterval(updateSystemInfo, 5000)
+        setInterval(updateNextEvent, 60000)
     </script>
 </body>
 </html>
