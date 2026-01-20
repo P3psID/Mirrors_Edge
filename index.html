@@ -160,17 +160,19 @@
             try {
                 const response = await fetch('http://localhost:5000/system-info');
                 const systemInfo = await response.json();
+
+                let FormatageTemp ;
                 
                 // Formatage de la température
                 if (systemInfo.temperature !== 'N/A') {
-                    const FormatageTemp = `${systemInfo.temperature}°C`
+                    FormatageTemp = `${systemInfo.temperature}°C`
                 } 
                 if (systemInfo.temperature === 'N/A') {
-                    const FormatageTemp = 'N/A'
+                    FormatageTemp = 'N/A'
                 }
                 
                 //Affichage du HTML
-                tempDisplay.textContent = `${FormatageTemp}`
+                tempDisplay.textContent = FormatageTemp ;
                 uptimeDisplay.textContent = `En marche depuis ${systemInfo.uptime_jours}j - ${systemInfo.uptime_heures}h ${systemInfo.uptime_minutes}`
                 
             } catch (error) {
