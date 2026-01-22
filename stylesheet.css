@@ -41,8 +41,8 @@ h1 {
 /* CERCLE SOLEIL/LUNE (position responsive) */
 .param_day, .param_coucher, .param_night {
     position: absolute;
-    top: -23vh;
-    left: -13vw;
+    top: -26vh;
+    left: -12vw;
     border-radius: 50%;
     width: 40vw;
     height: 40vw;
@@ -65,17 +65,17 @@ h1 {
 
 /* IMAGES SOLEIL/LUNE (taille responsive) */
 .param_img_lune {
-    width: 29vw;
+    width: 32vw;
     height: auto;
 }
 
 .param_img_coucher {
-    width: 25vw;
+    width: 28vw;
     height: auto;
 }
 
 .param_img_soleil {
-    width: 35vw;
+    width: 38vw;
     height: auto;
 }
 
@@ -83,8 +83,8 @@ h1 {
 .param_info {
     color: rgba(255, 255, 255, 0.849);
     position: absolute;
-    top: 10vh;
-    left: 30vw;
+    top: 7vh;
+    left: 27vw;
     text-align: left;
     font-family: 'Cinzel', serif;
     font-size: clamp(16px, 3vw, 45px); /* Taille adaptative */
@@ -94,10 +94,10 @@ h1 {
 /* CONTENEUR DES 3 ZONES EN BAS */
 .conteneur_bas {
     position: fixed;
-    bottom: 5vh;
-    left: 1vw;
-    width: 68vw;
-    height: 40vh;
+    bottom: 10vh;
+    left: 2vw;
+    width: 69vw;
+    height: 50vh;
     display: flex;
     gap: 1.5vw;
     padding: 0;
@@ -126,12 +126,12 @@ h1 {
 }
 
 #zone_2_titre {
-    font-size: clamp(12px, 1.8vw, 20px);
+    font-size: clamp(15px, 2.5vw, 26px);
     margin-bottom: 0.5vh;
 }
 
 #zone_2_event {
-    font-size: clamp(14px, 2vw, 24px);
+    font-size: clamp(12px, 1.8vw, 20px);
     font-weight: bold;
     margin: 0.5vh 0;
 }

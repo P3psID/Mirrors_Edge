@@ -233,19 +233,19 @@
                     
                     // Afficher dans la zone 2
 
-                    zone_2_titre.textContent = '📅 Prochain événement' ;
+                    zone_2_titre.textContent = 'Prochain événement' ;
                     zone_2_event.textContent = titre ;
                     zone_2_description.textContent = `${jour} ${date} - ${heure}`;
 
                 } else {
                     // Aucun événement à venir
-                    zone_2_titre.textContent = '📅 Calendrier vide' ;
+                    zone_2_titre.textContent = 'Calendrier vide' ;
                     zone_2_event.textContent = 'Aucun événement à venir' ;
                 }
                 
             } catch (error) {
                 console.error('Erreur Google Calendar:', error);
-                zone_2_titre.textContent = '❌ Erreur Calendar' ;
+                zone_2_titre.textContent = 'Erreur Calendar' ;
                 zone_2_event.textContent = 'Vérifiez la clé API' ;
 
             }
