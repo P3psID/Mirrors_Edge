@@ -84,7 +84,7 @@ h1 {
     color: rgba(255, 255, 255, 0.849);
     position: absolute;
     top: 7%;
-    left: 27%;
+    left: 20%;
     text-align: left;
     font-family: 'Cinzel', serif;
     font-size: clamp(16px, 3vw, 45px); /* Taille adaptative */
