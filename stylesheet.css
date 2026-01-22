@@ -182,18 +182,18 @@ h1 {
     }
     
     .param_day, .param_coucher, .param_night {
-        top: -15vh;
+        top: -15.5vh;
         left: -10vw;
         width: 35vw;
         height: 35vw;
     }
     
     .param_img_lune, .param_img_coucher {
-        width: 25vw;
+        width: 26vw;
     }
     
     .param_img_soleil {
-        width: 30vw;
+        width: 31vw;
     }
 }
 
