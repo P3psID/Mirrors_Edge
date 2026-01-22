@@ -94,7 +94,7 @@ h1 {
 /* CONTENEUR DES 3 ZONES EN BAS */
 .conteneur_bas {
     position: fixed;
-    bottom: 5vh;
+    bottom: 7vh;
     left: 2vw;
     width: 68vw;
     height: 45vh;
