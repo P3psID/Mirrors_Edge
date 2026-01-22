@@ -83,8 +83,8 @@ h1 {
 .param_info {
     color: rgba(255, 255, 255, 0.849);
     position: absolute;
-    top: 7vh;
-    left: 27vw;
+    top: 7%;
+    left: 27%;
     text-align: left;
     font-family: 'Cinzel', serif;
     font-size: clamp(16px, 3vw, 45px); /* Taille adaptative */
