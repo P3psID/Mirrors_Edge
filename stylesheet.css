@@ -96,7 +96,7 @@ h1 {
     position: fixed;
     bottom: 5vh;
     left: 2vw;
-    width: 69vw;
+    width: 68vw;
     height: 45vh;
     display: flex;
     gap: 1.5vw;
@@ -170,30 +170,30 @@ h1 {
 /* MEDIA QUERIES POUR ÉCRAN 7" (800x480px typique) */
 @media screen and (max-width: 900px) {
     .param_info {
-        top: 7vh;
+        top: 6vh;
         left: 26vw;
         font-size: clamp(12px, 2.5vw, 30px);
     }
     
     .conteneur_bas {
-        bottom: 4vh;
-        height: 40vh;
+        bottom: 6vh;
+        height: 39vh;
         gap: 1vw;
     }
     
     .param_day, .param_coucher, .param_night {
-        top: -15.5vh;
-        left: -10vw;
+        top: -14vh;
+        left: -9vw;
         width: 35vw;
         height: 35vw;
     }
     
     .param_img_lune, .param_img_coucher {
-        width: 26vw;
+        width: 30vw;
     }
     
     .param_img_soleil {
-        width: 31vw;
+        width: 33vw;
     }
 }
 
