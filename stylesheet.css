@@ -1,156 +1,216 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 h1 {
     font-family: 'Cinzel', serif;
 }
 
-.conteneur_bas {
-    position: fixed;
-    bottom: 100px;
-    left: 20px;
-    width: 64%;  
-    height: 41%;  
-    display: flex;
-    gap: 50px;  
-    padding: 10px;
-    z-index: 2;
+/* CONTENEUR PRINCIPAL */
+.conteneur_principal {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
 
-.zone_1 {
-    flex: 1; 
-    background-color: rgba(255, 255, 255, 0.067); 
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 24px;
-}
-
-.zone_2 {
-    flex: 1; 
-    background-color: rgba(255, 255, 255, 0.067); 
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 24px;
-}
-
-.zone_3 {
-    flex: 1; 
-    background-color: rgba(255, 255, 255, 0.067); 
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 24px;
-}
-
-.bandeau_droite {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 30%;  
-    height: 100vh;  
-    background-color: rgba(0, 0, 0, 0.801);
-    border-left: solid black 3px;
-    border-top-left-radius: 3%;
-    border-bottom-left-radius: 3%;
-    z-index: 2;  
-}
-
+/* BACKGROUNDS SELON MOMENT DE LA JOURNÉE */
 .body_night {
     background: linear-gradient(rgb(28, 1, 63), rgb(84, 27, 138));
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
-    }
+}
 
 .body_day {
     background: linear-gradient(#f58104, #efb541);
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
-    }
+}
 
 .body_coucher {
     background: linear-gradient(#D62828, #f58104);
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+}
+
+/* CERCLE SOLEIL/LUNE (position responsive) */
+.param_day, .param_coucher, .param_night {
+    position: absolute;
+    top: -23vh;
+    left: -13vw;
+    border-radius: 50%;
+    width: 40vw;
+    height: 40vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    }  
+}
 
+.param_day {
+    background: radial-gradient(circle, #fac830 20%, #f5810400 70%);
+}
+
+.param_coucher {
+    background: radial-gradient(circle, rgb(138, 32, 3) 20%, rgba(210, 61, 2, 0) 70%);
+}
+
+.param_night {
+    background: radial-gradient(circle, rgb(28, 1, 56) 20%, rgba(89, 28, 150, 0) 70%);
+}
+
+/* IMAGES SOLEIL/LUNE (taille responsive) */
 .param_img_lune {
-    width: 750px;
+    width: 29vw;
     height: auto;
 }
 
 .param_img_coucher {
-    width: 750px;
+    width: 25vw;
     height: auto;
 }
 
 .param_img_soleil {
-    width: 1200px;
+    width: 35vw;
     height: auto;
 }
 
-.param_day { 
-    position: absolute;
-        top: -455px;
-        left: -455px;
-    border-radius: 100%;
-    background: radial-gradient(circle, #fac830 20%, #f5810400 70%);
-    width: 1300px;
-    height: 1300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} 
-
-.param_coucher { 
-    position: absolute;
-        top: -455px;
-        left: -455px;
-    border-radius: 100%;
-    background: radial-gradient(circle, rgb(138, 32, 3) 20%, rgba(210, 61, 2, 0) 70%);
-    width: 1300px;
-    height: 1300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} 
-
-.param_night { 
-    position: absolute;
-        top: -455px;
-        left: -455px;
-    border-radius: 100%;
-    background: radial-gradient(circle, rgb(28, 1, 56) 20%, rgba(89, 28, 150, 0) 70%);
-    width: 1300px;
-    height: 1300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} 
-
+/* DATE ET HEURE (en haut au centre-droit) */
 .param_info {
     color: rgba(255, 255, 255, 0.849);
     position: absolute;
-    top: 50px;
-    left: 650px;
+    top: 10vh;
+    left: 30vw;
     text-align: left;
-    font-family: Arial, sans-serif;
-    font-size: 45px;
-    }
+    font-family: 'Cinzel', serif;
+    font-size: clamp(16px, 3vw, 45px); /* Taille adaptative */
+    z-index: 1;
+}
 
+/* CONTENEUR DES 3 ZONES EN BAS */
+.conteneur_bas {
+    position: fixed;
+    bottom: 5vh;
+    left: 1vw;
+    width: 68vw;
+    height: 40vh;
+    display: flex;
+    gap: 1.5vw;
+    padding: 0;
+    z-index: 2;
+}
+
+/* ZONES 1, 2, 3 */
+.zone_1, .zone_2, .zone_3 {
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.067);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: clamp(10px, 1.5vw, 24px);
+    padding: 1vh 0.5vw;
+    overflow: hidden;
+}
+
+/* Contenu zone 2 centré */
+#zone_2_center {
+    text-align: center;
+    padding: 1vh;
+}
+
+#zone_2_titre {
+    font-size: clamp(12px, 1.8vw, 20px);
+    margin-bottom: 0.5vh;
+}
+
+#zone_2_event {
+    font-size: clamp(14px, 2vw, 24px);
+    font-weight: bold;
+    margin: 0.5vh 0;
+}
+
+#zone_2_description {
+    font-size: clamp(10px, 1.5vw, 18px);
+    margin-top: 0.5vh;
+}
+
+/* Zone 1 - Température et Uptime */
+#temp-display {
+    font-size: clamp(16px, 2.5vw, 32px);
+    font-weight: bold;
+    margin-bottom: 0.5vh;
+}
+
+#uptime-display {
+    font-size: clamp(8px, 1.2vw, 16px);
+    text-align: center;
+}
+
+/* BANDEAU NOIR À DROITE */
+.bandeau_droite {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 27vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.801);
+    border-left: solid black 3px;
+    border-top-left-radius: 3%;
+    border-bottom-left-radius: 3%;
+    z-index: 2;
+}
+
+/* MEDIA QUERIES POUR ÉCRAN 7" (800x480px typique) */
+@media screen and (max-width: 900px) {
+    .param_info {
+        top: 2vh;
+        left: 30vw;
+        font-size: clamp(12px, 2.5vw, 30px);
+    }
+    
+    .conteneur_bas {
+        bottom: 1vh;
+        height: 30vh;
+        gap: 1vw;
+    }
+    
+    .param_day, .param_coucher, .param_night {
+        top: -10vh;
+        left: -10vw;
+        width: 35vw;
+        height: 35vw;
+    }
+    
+    .param_img_lune, .param_img_coucher {
+        width: 20vw;
+    }
+    
+    .param_img_soleil {
+        width: 28vw;
+    }
+}
+
+/* MEDIA QUERIES POUR TRÈS PETIT ÉCRAN (< 600px) */
+@media screen and (max-width: 600px) {
+    .param_info {
+        font-size: clamp(10px, 2vw, 20px);
+        left: 25vw;
+    }
+    
+    .conteneur_bas {
+        width: 68vw;
+        height: 25vh;
+        font-size: clamp(8px, 1.2vw, 16px);
+    }
+    
+    .bandeau_droite {
+        width: 30vw;
+    }
+}
