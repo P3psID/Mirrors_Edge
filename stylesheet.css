@@ -190,7 +190,7 @@ h1 {
 @media screen and (max-width: 900px) {
     .param_info {
         top: 6vh;
-        left: 30vw;
+        left: 33vw;
         font-size: clamp(12px, 2.5vw, 30px);
     }
     
