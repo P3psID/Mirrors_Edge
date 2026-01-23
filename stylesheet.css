@@ -84,7 +84,7 @@ h1 {
     color: rgba(255, 255, 255, 0.849);
     position: absolute;
     top: 7vh;
-    left: 27vw;
+    left: 30vw;
     text-align: left;
     font-family: 'Cinzel', serif;
     font-size: clamp(16px, 3vw, 45px); /* Taille adaptative */
@@ -107,7 +107,7 @@ h1 {
 /* ZONES 1, 2, 3 */
 .zone_1, .zone_2, .zone_3 {
     flex: 1;
-    background-color: rgba(255, 255, 255, 0.067);
+    background-color: rgba(255, 255, 255, 0.13);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -126,7 +126,7 @@ h1 {
 }
 
 #zone_2_titre {
-    font-size: 2.2vw;
+    font-size: 2.4vw;
     margin-bottom: 0.5vh;
 }
 
@@ -137,7 +137,7 @@ h1 {
 }
 
 #zone_2_description {
-    font-size: 1.3vw;
+    font-size: 1.6vw;
     margin-top: 0.5vh;
 }
 
@@ -167,11 +167,30 @@ h1 {
     z-index: 2;
 }
 
+
+/* Zone 3 - Météo */
+.zone_3 h3 {
+    font-size: 2.4vw;
+    margin-bottom: 0.5vh;
+}
+
+#icone-meteo {
+    width: 10vw;
+    height: auto;
+    margin: 0.5vh 0;
+}
+
+#temp-meteo {
+    font-size: 1.6vw;
+    text-align: center;
+    text-transform: capitalize; /* Première lettre en majuscule */
+}
+
 /* MEDIA QUERIES POUR ÉCRAN 7" (800x480px typique) */
 @media screen and (max-width: 900px) {
     .param_info {
         top: 6vh;
-        left: 26vw;
+        left: 30vw;
         font-size: clamp(12px, 2.5vw, 30px);
     }
     

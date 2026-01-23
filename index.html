@@ -36,7 +36,9 @@
                 </div>
             </div>
             <div class="zone_3">
-                <p>Zone 3</p>
+                <h3>Météo</h3>
+                <img src="" id="icone-meteo" alt="">
+                <p id="temp-meteo"></p>
             </div>
         </div>
 
@@ -68,6 +70,10 @@
             const infoJour = document.getElementById('info-text-1')
             const infoDate = document.getElementById('info-text-2')
             const infoHeure = document.getElementById('info-text-3')
+            
+            // Éléments zone 3 météo
+            const iconeMeteo = document.getElementById('icone-meteo')
+            const tempMeteo = document.getElementById('temp-meteo')
 
             if (CONFIG.WEATHER_API_KEY === '') {
                 iconDate.textContent = '⚙️'
@@ -86,7 +92,7 @@
             const heure = `${String(nowDate.getHours()).padStart(2, '0')}:${String(nowDate.getMinutes()).padStart(2, '0')}`
 
             try {
-                const url = `https://api.openweathermap.org/data/2.5/weather?q=${CONFIG.CITY}&appid=${CONFIG.WEATHER_API_KEY}`
+                const url = `https://api.openweathermap.org/data/2.5/weather?q=${CONFIG.CITY}&appid=${CONFIG.WEATHER_API_KEY}&units=metric&lang=fr`
                 const response = await fetch(url)
                 
                 if (!response.ok) {
@@ -94,6 +100,17 @@
                 }
                 
                 const data = await response.json()
+                
+                // ===== ZONE 3 : MÉTÉO =====
+                // Récupérer température et icône météo
+                const temperature = Math.round(data.main.temp)
+                const weatherIcon = data.weather[0].icon
+                const weatherDescription = data.weather[0].description
+                
+                // Utiliser les icônes d'OpenWeather (PNG haute qualité)
+                iconeMeteo.src = `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`
+                iconeMeteo.alt = weatherDescription
+                tempMeteo.textContent = `${temperature}°C - ${weatherDescription}`
                 
                 // Timestamps de lever et coucher du soleil (en secondes)
                 const sunrise = data.sys.sunrise
@@ -162,6 +179,7 @@
                 iconDate.textContent = 'erreur'
                 infoJour.textContent = `${jour}`
                 infoHeure.textContent = `${heure}`
+                tempMeteo.textContent = 'Erreur météo'
                 console.error('Erreur:', error)
             }
         }
