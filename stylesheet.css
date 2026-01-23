@@ -201,8 +201,8 @@ h1 {
     }
     
     .param_day, .param_coucher, .param_night {
-        top: -14.5vh;
-        left: -9vw;
+        top: -14vh;
+        left: -8.5vw;
         width: 35vw;
         height: 35vw;
     }
@@ -212,7 +212,7 @@ h1 {
     }
     
     .param_img_soleil {
-        width: 40vw;
+        width: 43vw;
     }
 }
 
