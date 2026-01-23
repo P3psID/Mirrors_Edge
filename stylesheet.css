@@ -186,6 +186,45 @@ h1 {
     text-transform: capitalize; /* Première lettre en majuscule */
 }
 
+
+/* Conteneur des objectifs dans le bandeau */
+.objectifs-container {
+    padding: 3vh 2vw;
+    color: rgba(255, 255, 255, 0.877);
+}
+
+.objectifs-titre {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(16px, 2vw, 28px);
+    text-align: center;
+    margin-bottom: 3vh;
+    color: rgba(255, 255, 255, 0.877);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 1vh;
+}
+
+.objectifs-liste {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.objectif-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1.5vh 1vw;
+    margin-bottom: 1.5vh;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    font-size: clamp(10px, 1.3vw, 16px);
+    line-height: 1.4;
+    transition: all 0.3s ease;
+}
+
+.objectif-item:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateX(5px);
+}
+
 /* MEDIA QUERIES POUR ÉCRAN 7" (800x480px typique) */
 @media screen and (max-width: 900px) {
     .param_info {
@@ -214,7 +253,24 @@ h1 {
     .param_img_soleil {
         width: 45vw;
     }
+    
+    .objectifs-container {
+        padding: 2vh 1vw;
+    }
+
+    .objectifs-titre {
+        font-size: clamp(12px, 1.5vw, 20px);
+        margin-bottom: 2vh;
+    }
+
+    .objectif-item {
+        padding: 1vh 0.8vw;
+        margin-bottom: 1vh;
+        font-size: clamp(8px, 1.1vw, 14px);
+    }
+    
 }
+
 
 /* MEDIA QUERIES POUR TRÈS PETIT ÉCRAN (< 600px) */
 @media screen and (max-width: 600px) {

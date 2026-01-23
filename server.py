@@ -23,11 +23,6 @@ def get_cpu_temperature():
     return None
 
 
-@app.route('/test')
-def test():
-    print('test')
-    return 'test'
-
 @app.route('/system-info')
 def system_info():
     # Température CPU
@@ -47,6 +42,38 @@ def system_info():
         'uptime_heures': heures,
         'uptime_minutes': minutes,
     })
+
+
+@app.route('/objectifs')
+def get_objectifs():
+    """
+    Lit le fichier objectifs.txt et retourne la liste en JSON
+    """
+    try:
+        # Lire le fichier
+        with open('objectifs.txt', 'r', encoding='utf-8') as f:
+            lignes = f.readlines()
+        
+        # Nettoyer les lignes (enlever espaces et lignes vides)
+        objectifs = [ligne.strip() for ligne in lignes if ligne.strip()]
+        
+        return jsonify({
+            'objectifs': objectifs,
+            'total': len(objectifs)
+        })
+    
+    except FileNotFoundError:
+        return jsonify({
+            'error': 'Fichier objectifs.txt introuvable',
+            'objectifs': []
+        }), 404
+    
+    except Exception as e:
+        return jsonify({
+            'error': str(e),
+            'objectifs': []
+        }), 500
+
 
 @app.route('/shutdown')
 def shutdown():

@@ -274,16 +274,59 @@
             }
         }
 
+        ///////// FONCTION QUI AFFICHE LES OBJECTIFS DANS LE BANDEAU
+        async function updateObjectifs() {
+            const bandeauDroite = document.querySelector('.bandeau_droite');
+            
+            try {
+                const response = await fetch('http://localhost:5000/objectifs');
+                const data = await response.json();
+                
+                if (data.objectifs && data.objectifs.length > 0) {
+                    // Créer le HTML avec la liste des objectifs
+                    let objectifsHTML = '<div class="objectifs-container">';
+                    objectifsHTML += '<h2 class="objectifs-titre">Mes Objectifs</h2>';
+                    objectifsHTML += '<ul class="objectifs-liste">';
+                    
+                    data.objectifs.forEach(objectif => {
+                        objectifsHTML += `<li class="objectif-item">${objectif}</li>`;
+                    });
+                    
+                    objectifsHTML += '</ul></div>';
+                    
+                    bandeauDroite.innerHTML = objectifsHTML;
+                } else {
+                    bandeauDroite.innerHTML = `
+                        <div class="objectifs-container">
+                            <h2 class="objectifs-titre">Mes Objectifs</h2>
+                            <p style="color: white; padding: 20px; text-align: center;">Aucun objectif défini</p>
+                        </div>
+                    `;
+                }
+                
+            } catch (error) {
+                console.error('Erreur lors de la récupération des objectifs:', error);
+                bandeauDroite.innerHTML = `
+                    <div class="objectifs-container">
+                        <h2 class="objectifs-titre">Mes Objectifs</h2>
+                        <p style="color: red; padding: 20px; text-align: center;">Erreur de chargement</p>
+                    </div>
+                `;
+            }
+        }
+
 
         // Charger au démarrage
         UpdateSunMoon()
         updateSystemInfo()
         updateNextEvent()
+        updateObjectifs()
 
         // Actualiser toutes les minutes
         setInterval(UpdateSunMoon, 60000)
         setInterval(updateSystemInfo, 5000)
         setInterval(updateNextEvent, 60000)
+        setInterval(updateObjectifs, 60000)
     </script>
 </body>
 </html> 
