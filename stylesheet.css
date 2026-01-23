@@ -195,7 +195,7 @@ h1 {
 
 .objectifs-titre {
     font-family: 'Cinzel', serif;
-    font-size: 2.4vw;
+    font-size: 2.5vw;
     text-align: center;
     margin-bottom: 5vh;
     color: rgba(255, 255, 255, 0.877);
@@ -254,14 +254,14 @@ h1 {
     }
 
     .objectifs-titre {
-        font-size: 2.4vw;
+        font-size: 2.5vw;
         margin-bottom: 5vh;
     }
 
     .objectif-item {
         padding: 1vh 0.8vw;
-        margin-bottom: vh;
-        font-size: 1.6vw;
+        margin-bottom: 2vh;
+        font-size: 2vw;
     }
 
 }
