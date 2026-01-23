@@ -18,7 +18,8 @@
         </div>
         <div class="param_info">
             <h1 id="info-text-1"></h1>
-            <h1 id="info-text-2"></h1>
+            <h2 id="info-text-2"></h2>
+            <h2 id="info-text-3"></h2>
         </div>
 
         <div class="conteneur_bas">
@@ -64,8 +65,9 @@
             const body_degrade = document.querySelector('body')
             const div_degrade = document.getElementById('icon-journee')
             const iconDate = document.getElementById('sun-moon-icon')
-            const infoDate = document.getElementById('info-text-1')
-            const infoHeure = document.getElementById('info-text-2')
+            const infoJour = document.getElementById('info-text-1')
+            const infoDate = document.getElementById('info-text-2')
+            const infoHeure = document.getElementById('info-text-3')
 
             if (CONFIG.WEATHER_API_KEY === '') {
                 iconDate.textContent = '⚙️'
@@ -82,8 +84,6 @@
             const date = `${String(nowDate.getDate()).padStart(2, '0')}/${String(nowDate.getMonth() + 1).padStart(2, '0')}/${nowDate.getFullYear()}`
             // Heure
             const heure = `${String(nowDate.getHours()).padStart(2, '0')}:${String(nowDate.getMinutes()).padStart(2, '0')}`
-            // Formatage de la date
-            const dateFormatee = `${jour} ${date}`
 
             try {
                 const url = `https://api.openweathermap.org/data/2.5/weather?q=${CONFIG.CITY}&appid=${CONFIG.WEATHER_API_KEY}`
@@ -117,7 +117,8 @@
                     iconDate.className = 'param_img_lune'
                     body_degrade.className = 'body_night'
                     div_degrade.className = 'param_night'
-                    infoDate.textContent = `${dateFormatee}`
+                    infoJour.textContent = `${jour}`
+                    infoDate.textContent = `${date}`
                     infoHeure.textContent = `${heure}`
                 } else if (now >= sunrise && now < morningEnd) {
                     // Matinée (lever du soleil jusqu'à 1h après)
@@ -125,7 +126,8 @@
                     iconDate.className = 'param_img_coucher'
                     body_degrade.className = 'body_coucher'
                     div_degrade.className = 'param_coucher'
-                    infoDate.textContent = `${dateFormatee}`
+                    infoJour.textContent = `${jour}`
+                    infoDate.textContent = `${date}`
                     infoHeure.textContent = `${heure}`
                 } else if (now >= morningEnd && now < eveningStart) {
                     // Journée
@@ -133,7 +135,8 @@
                     iconDate.className = 'param_img_soleil'
                     body_degrade.className = 'body_day'
                     div_degrade.className = 'param_day'
-                    infoDate.textContent = `${dateFormatee}`
+                    infoJour.textContent = `${jour}`
+                    infoDate.textContent = `${date}`
                     infoHeure.textContent = `${heure}`
                 } else if (now >= eveningStart && now < sunset) {
                     // Soir (1h avant le coucher jusqu'au coucher)
@@ -141,7 +144,8 @@
                     iconDate.className = 'param_img_coucher'
                     body_degrade.className = 'body_coucher'
                     div_degrade.className = 'param_coucher'
-                    infoDate.textContent = `${dateFormatee}`
+                    infoJour.textContent = `${jour}`
+                    infoDate.textContent = `${date}`
                     infoHeure.textContent = `${heure}`
                 } else {
                     // Nuit (après le coucher du soleil)
@@ -149,14 +153,15 @@
                     iconDate.className = 'param_img_lune'
                     body_degrade.className = 'body_night'
                     div_degrade.className = 'param_night'
-                    infoDate.textContent = `${dateFormatee}`
+                    infoJour.textContent = `${jour}`
+                    infoDate.textContent = `${date}`
                     infoHeure.textContent = `${heure}`
                 }
                 
             } catch (error) {
                 iconDate.textContent = 'erreur'
-                infoDate.textContent = `${dateFormatee}`
-                infoHeure.textContent = `${dateFormatee}`
+                infoJour.textContent = `${jour}`
+                infoHeure.textContent = `${heure}`
                 console.error('Erreur:', error)
             }
         }
@@ -182,7 +187,7 @@
                 }
                 
                 //Affichage du HTML
-                tempDisplay.textContent = FormatageTemp ;
+                tempDisplay.textContent = `Temp CPU: ${FormatageTemp}`;
                 uptimeDisplay.textContent = `En marche depuis ${systemInfo.uptime_jours}j - ${systemInfo.uptime_heures}h ${systemInfo.uptime_minutes}`
                 
             } catch (error) {
