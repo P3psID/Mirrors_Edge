@@ -195,12 +195,12 @@ h1 {
 
 .objectifs-titre {
     font-family: 'Cinzel', serif;
-    font-size: clamp(16px, 2vw, 28px);
+    font-size: 2.4vw;
     text-align: center;
-    margin-bottom: 3vh;
+    margin-bottom: 5vh;
     color: rgba(255, 255, 255, 0.877);
     border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-    padding-bottom: 1vh;
+    padding-bottom: 3vh;
 }
 
 .objectifs-liste {
@@ -210,19 +210,14 @@ h1 {
 }
 
 .objectif-item {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.082);
     padding: 1.5vh 1vw;
     margin-bottom: 1.5vh;
     border-radius: 8px;
-    border-left: 4px solid #667eea;
-    font-size: clamp(10px, 1.3vw, 16px);
+    border-left: 4px solid #5a74eb3f;
+    font-size: 1.6vw;
     line-height: 1.4;
     transition: all 0.3s ease;
-}
-
-.objectif-item:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    transform: translateX(5px);
 }
 
 /* MEDIA QUERIES POUR ÉCRAN 7" (800x480px typique) */
@@ -259,16 +254,16 @@ h1 {
     }
 
     .objectifs-titre {
-        font-size: clamp(12px, 1.5vw, 20px);
-        margin-bottom: 2vh;
+        font-size: 2.4vw;
+        margin-bottom: 5vh;
     }
 
     .objectif-item {
         padding: 1vh 0.8vw;
-        margin-bottom: 1vh;
-        font-size: clamp(8px, 1.1vw, 14px);
+        margin-bottom: vh;
+        font-size: 1.6vw;
     }
-    
+
 }
 
 
