@@ -206,7 +206,7 @@
                 
                 //Affichage du HTML
                 tempDisplay.textContent = `Temp CPU: ${FormatageTemp}`;
-                uptimeDisplay.textContent = `En marche depuis ${systemInfo.uptime_jours}j - ${systemInfo.uptime_heures}h ${systemInfo.uptime_minutes}`
+                uptimeDisplay.textContent = `En marche depuis :           ${systemInfo.uptime_jours}j - ${systemInfo.uptime_heures}h ${systemInfo.uptime_minutes}`
                 
             } catch (error) {
                 console.error('Erreur lors de la récupération des systemInfo :', error);
