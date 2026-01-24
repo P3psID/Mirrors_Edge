@@ -75,13 +75,6 @@ def get_objectifs():
         }), 500
 
 
-@app.route('/shutdown')
-def shutdown():
-    print('Shutting down')
-    os.system("shutdown -h now")
-    return None
-
-
 if __name__ == '__main__':
     print("Infos du système sur : http://localhost:5000/system-info")
     app.run(host='0.0.0.0', port=5000)
