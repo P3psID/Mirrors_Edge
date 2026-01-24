@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 import time
 import subprocess
 
-BUTTON_PIN = 17
+BUTTON_PIN = 16
 LONG_PRESS_TIME = 3
 
 press_time = None
