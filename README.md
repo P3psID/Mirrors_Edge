@@ -1,4 +1,4 @@
-Mirrors_Edge
+Smart Screen
 
 The goal of this project is to have a connected mirror, in which you can see your reflexion, but also some information concerning your environment (weather, temperature, and more things)
 
