@@ -46,6 +46,7 @@ myproject/
 ├── index.html          # Main interface
 ├── stylesheet.css      # CSS
 ├── server.py          # Flask API server
+├── script.js           # JS
 ├── shutdown.py         # Shutdown script
 ├── objectifs.txt      # The goals list
 └── images/
