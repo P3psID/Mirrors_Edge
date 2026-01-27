@@ -2,7 +2,7 @@
 
 A fully automated connected display showing real-time environmental data (weather, temperature, etc.).
 Key feature: Everything is dynamic and user-friendly. No SSH administration, no keyboard needed—just plug and "play".
-This README covers web interface development and implementation only (and has been written thanks to Claude ahah, if you have deeper questions, you can contact me).
+This README covers web Raspberry configuration, interface development and implementation only (and has been written thanks to Claude ahah, if you have deeper questions, you can contact me).
 
 ## Prerequisites
 
