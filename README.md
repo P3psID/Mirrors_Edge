@@ -19,7 +19,7 @@ Skills needed:
   systemd
 
 
-# 1st Step : Configure your Raspberry 
+## 1st Step : Configure your Raspberry 
 
 # Install OS: Raspberry Pi OS Lite (64-bit) 
 
