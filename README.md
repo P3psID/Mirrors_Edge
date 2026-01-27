@@ -1,26 +1,25 @@
-Smart Screen
+# Smart Screen
 
 A fully automated connected display showing real-time environmental data (weather, temperature, etc.).
 Key feature: Everything is dynamic and user-friendly. No SSH administration, no keyboard needed—just plug and "play".
 This README covers web interface development and implementation only (and has been written thanks to Claude ahah, if you have deeper questions, you can contact me).
 
-Prerequisites
-Hardware:
+# Prerequisites
 
-Raspberry Pi 4 (2GB+ RAM)
-MicroSD card (16GB+)
-Monitor
+Hardware:
+  Raspberry Pi 4 (2GB+ RAM)
+  MicroSD card (16GB+)
+  Monitor
 
 Skills needed:
+  HTML/CSS
+  JavaScript + APIs
+  Python + Flask
+  Linux basics (Raspberry Pi OS Lite)
+  systemd
 
-HTML/CSS
-JavaScript + APIs
-Python + Flask
-Linux basics (Raspberry Pi OS Lite)
-systemd
 
-
-1st Step : Configure your Raspberry 
+# 1st Step : Configure your Raspberry 
 
 # Install OS: Raspberry Pi OS Lite (64-bit) 
 
