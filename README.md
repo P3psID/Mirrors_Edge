@@ -74,8 +74,8 @@ After=network.target
 
 [Service]
 User=pi
-WorkingDirectory=/home/pi/myproject
-ExecStart=/home/pi/myproject/.venv/bin/python server.py
+WorkingDirectory=/home/YOUR_USER/myproject
+ExecStart=/home/YOUR_USER/myproject/.venv/bin/python server.py
 Restart=always
 
 [Install]
@@ -83,7 +83,7 @@ WantedBy=multi-user.target
 
 
 
-Automate the launch of the web navigator
+Automate the launch of the web navigator :
 [Unit]
 Description=Openbox Kiosk Mode
 After=monserver.service
@@ -96,10 +96,46 @@ Type=simple
 User=peps
 
 Environment=DISPLAY=:0
-Environment=XAUTHORITY=/home/peps/.Xauthority
+Environment=XAUTHORITY=/home/YOUR_USER/.Xauthority
 
 ExecStart=/usr/bin/startx
 Restart=no
 
 [Install]
 WantedBy=multi-user.target
+
+
+
+Automate the launch of the shutdown.py script at the boot :
+[Unit]
+Description=Sert à déclencher au démarrage le daemon de shutdown
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/YOUR_USER/myproject/shutdown.py
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+Don't forget to also automate the launch of your web interface on your navigator config files :
+
+sudo nano home/YOUR_USER/.config/openbox/autostart
+
+xset s off
+xset -dpms
+xset s noblank
+unclutter -idle 0 &
+chromium-browser --kiosk --noerrdialogs --disable-infobars --check-for-update-interval=31536000 file:///ABSOLUTE_PATH_TO_HTML_FILE &
+
+## Usage
+Edit goals: Modify objectifs.txt and save
+Configure APIs: Add keys in index.html CONFIG sections
+Reboot: sudo reboot
+Interface loads automatically in fullscreen
+
+### Hope you have fun!
